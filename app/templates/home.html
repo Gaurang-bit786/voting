@@ -1,0 +1,114 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+
+{% include 'navbar.html' %}
+
+<div class="container mt-4">
+    <div class="row mb-4">
+        <div class="col-1"></div>
+        <div class="col">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h3 class="fw-bold">Profile</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+    <div class="row px-5">
+        <div class="col-md-4 my-1" >
+            <div height="100%" class="card">
+                <div class="card-header">
+                    <buttontype="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Upload Image</button>
+                </div>
+                <div class="card-body">
+                    <div class="text-center rounded rounded-circle ">
+                        <img width="79%" src="https://bestprofilepictures.com/wp-content/uploads/2021/04/Cool-Profile-Picture.jpg" class="rounded rounded-circle img-thumbnail" alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 my-1">
+            <div class="card">
+                <div class="card-header rounded">
+                    <h4>Profile Details</h4>
+                </div>
+                <div class="card-body">
+                    <form class="form-group">
+                        {% csrf_token %}
+                        <div class="row my-2">
+                            <div class="col-md-2">
+                                Username
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control form-control-sm" name="username" value="{{ user.username }}" />
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-2">
+                                Firstname
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control form-control-sm" name="firstname" value="{{ user.first_name }}"/>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-2">
+                                Lastname
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control form-control-sm" name="lastname" value="{{ user.last_name }}" />
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-md-2">
+                                Email
+                            </div>
+                            <div class="col">
+                                <input type="email"  class="form-control form-control-sm" name="email" value="{{ user.email }}" />
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-10"></div>
+                            <div class="col">
+                                <button class="btn btn-primary ">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="card">
+              <div class="card-header">
+                  <h5>Add Image</h5>
+              </div>
+              <div class="card-body">
+                  <form>
+                       <input type="file" />
+                  </form>
+              </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

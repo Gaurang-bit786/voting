@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div class="row">
+  {% if error %}
+    {{error}}
+  {% endif %}
+</div>
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs ">
+      <li class="tab col s3"><a class="active" href="#test1">Login</a></li>
+      <li class="tab col s3"><a  href="#test2">Sign Up</a></li>
+    </ul>
+  </div>
+
+  <div id="test1" class="col s12">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      <div class="input-field  ">
+        <input name="username" id="roll" type="text" class="validate">
+        <label for="last_name">Roll No</label>
+      </div>
+      <div class="input-field  ">
+        <input name="password" id="roll" type="password" class="validate">
+        <label for="last_name">Password</label>
+      </div>
+      <button class="btn waves-effect waves-light  light-blue darken-3" type="submit" name="action">Login
+      </button>
+    </form>
+  </div>
+  <div id="test2" class="col s12">
+    <!-- <form action="{% url 'register' %}" method="POST"> -->
+      {% csrf_token %}
+      <div class="input-field  ">
+        <input id="fname1" name="fname" type="text" class="validate">
+        <label for="last_name">Firstname</label>
+      </div>
+      <div class="input-field  ">
+        <input name="lname" id="lname1" type="text" class="validate">
+        <label for="last_name">Lastname</label>
+      </div>
+      <div class="input-field  ">
+        <input name="roll_no" id="roll_no1" type="text" class="validate">
+        <label for="last_name">Roll No</label>
+      </div>
+      <div class="input-field  ">
+        <input name="email" id='email1' type="email" class="validate">
+        <label for="last_name">Email</label>
+      </div>
+      <div class="input-field  ">
+        <input name="password" id='password1' type="password" class="validate">
+        <label for="last_name">Password</label>
+      </div>
+      <div class="preloader-wrapper active" >
+        <div class=" spinner-blue-only" id="spinner">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div>
+          <div class="gap-patch">
+            <div class="circle"></div>
+          </div><div class="circle-clipper right">
+            <div class="circle"></div>
+          </div>
+        </div>
+      </div>
+      <button class="btn waves-effect waves-light  light-blue darken-3" id="register" type="submit" name="action">
+        Submit
+      </button>
+    <!-- </form> -->
+  </div>
+</div>
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+      $('#register').click(function(e){
+        e.preventDefault();
+        var spin = $('#spinner')
+        spin[0].classList.add('spinner-layer')
+        $('#register').hide()
+        var data = {
+          'csrfmiddlewaretoken':$('input[name="csrfmiddlewaretoken"]').val(),
+          'fname':$('#fname1').val(),
+          'lname':$('#lname1').val(),
+          'roll_no':$('#roll_no1').val(),
+          'email':$('#email1').val(),
+          'password':$('#password1').val(),
+        }
+
+        if(data.roll_no.includes('17005060') || data.roll_no.includes('18005060') || data.roll_no.includes('19000500600') || data.roll_no.includes('20000500600') || data.roll_no.includes('21000500600') || data.roll_no.includes('19000501400') || data.roll_no.includes('20000501400') || data.roll_no.includes('21000501400')|| data.roll_no.includes('17005390') || data.roll_no.includes('17126390') || data.roll_no.includes('18005390') || data.roll_no.includes('19000503900') || data.roll_no.includes('2000050700') || data.roll_no.includes('2000050390') || data.roll_no.includes('2100050700') || data.roll_no.includes('2000050390')){
+          $.ajax({
+            url:"{% url 'register' %}",
+            type:'POST',
+            data:data,
+            success:function(e){
+              console.log(e)
+              $('#register').show()
+              spin[0].classList.remove('spinner-layer')
+                swal({
+                  title: "Good job!",
+                  text: e.msg,
+                  icon: "success",
+                }).then(e=>{
+                  window.location.reload()
+                });
+            },
+            error:function(){
+              swal({
+                  title: "Warning!",
+                  text: 'User Already Register!!',
+                  icon: "warning",
+              }).then(e=>{
+                  window.location.reload()
+              });
+            }
+          })
+          
+        }else{
+          swal({
+            title: "Warning!",
+            text: "Enter a valid college roll number!!",
+            icon: "warning",
+          });
+        }
+        
+      })
+  })
+</script>
+
+{% endblock %}

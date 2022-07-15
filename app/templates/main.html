@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<!-- <div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4 ">
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5>User Details</h5>                    
+                </div>
+                <div class="text-center card-body">
+                    <p>Click Here To Check User Details</p>
+                    <a href="{% url 'index' %}" class="btn btn-primary">User details</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card my-3">
+                <div class="card-header">
+                    <h5>Votes</h5>
+                </div>
+                <div class="text-center card-body">
+                    <p>Click Here for Votes</p>
+                    <a href="{% url 'voters' %}" class="btn btn-primary">Votes</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card my-3" >
+                <div class="card-header">
+                    <h5>Result</h5>
+                </div>
+                <div class="text-center card-body">
+                    <p>Click Here To Check Result</p>
+                    <a href="{% url 'analysis' %}" class="btn btn-primary">Results</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="container">
+    <div class="row">
+        <div class="col s12 m7">
+          <div class="card">
+            <div class="card-content text-center">
+                <span class="card-title">User Profile</span>
+            </div>
+            <div class="card-action">
+              <a class="btn blue" href="{% url 'index' %}">Click Here</a>
+            </div>
+          </div>
+        </div>
+        <div class="col s12 m7">
+            <div class="card">
+              <div class="card-content text-center">
+                  <span class="card-title">Votes</span>
+              </div>
+              <div class="card-action">
+                <a class="btn blue" href="{% url 'voters' %}">Click Here</a>
+              </div>
+            </div>
+        </div>
+        {% if user.is_superuser %}
+        <div class="col s12 m7">
+            <div class="card">
+              <div class="card-content text-center">
+                  <span class="card-title">Analysis</span>
+              </div>
+              <div class="card-action">
+                <a class="btn blue" href="{% url 'analysis' %}">Click Here</a>
+              </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+            
+
+{% endblock %}
